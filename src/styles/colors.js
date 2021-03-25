@@ -5,6 +5,7 @@ const COLORS = {
   smoke: '#8E8E8E',
   darkSmoke: '#555555',
   darkBlue: '#167ABC',
+  darkBlueTransparent: '#167ABC88',
   shadowBoxColor: '#00000033',
 }
 

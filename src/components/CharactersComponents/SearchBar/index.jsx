@@ -9,7 +9,7 @@ import SearchIcon from 'components/Icons/Search'
 const SearchBar = () => {
   return (
     <Wrapper>
-      <Label>Nome do Personagem</Label>
+      <Label>Nome do personagem</Label>
       <SearchInputWrapper>
         <input placeholder="Search" name="searchBar" type="text" />
         <SearchIcon />
