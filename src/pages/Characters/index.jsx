@@ -1,14 +1,27 @@
-import { Wrapper, Header } from 'pages/Characters/styled'
+import {
+  Wrapper,
+  Header,
+  Pagination,
+  HeaderWrapper,
+  BodyWrapper,
+} from './styled'
 import SearchBar from 'components/CharactersComponents/SearchBar'
+import CharactersList from 'components/CharactersComponents/CharactersList'
 
 const Characters = () => {
   return (
-    <Wrapper>
-      <Header>Busca de Personagens</Header>
-      <SearchBar />
-      <div>List</div>
-      <div>Pagination</div>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <HeaderWrapper>
+          <Header>Busca de Personagens</Header>
+          <SearchBar />
+        </HeaderWrapper>
+        <BodyWrapper>
+          <CharactersList characters={[{}, {}, {}, {}, {}, {}, {}, {}, {}]} />
+        </BodyWrapper>
+      </Wrapper>
+      <Pagination>Pagination</Pagination>
+    </>
   )
 }
 
