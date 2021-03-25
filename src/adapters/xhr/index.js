@@ -1,12 +1,15 @@
-function getInitializer({ method }) {
+function getInitializer({ method, etag }) {
   return {
     method,
     mode: 'cors',
     cache: 'default',
+    headers: {
+      'If-None-Match': etag,
+    },
   }
 }
 
-export function get(url, params) {
+export function get(url, params, etag) {
   const uri = new URL(url)
 
   uri.search = new URLSearchParams({
@@ -14,11 +17,8 @@ export function get(url, params) {
     apikey: process.env.REACT_APP_API_KEY,
   }).toString()
 
-  const initializer = getInitializer({ method: 'get' })
+  const initializer = getInitializer({ method: 'get', etag })
   return fetch(uri, initializer)
 }
 
-// export function post(url, requestData) {
-//   const initializer = getInitializer()
-//   return axios.post(url, requestData)
-// }
+export const BASE_API_URL = process.env.REACT_APP_API_URL

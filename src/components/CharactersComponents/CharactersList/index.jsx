@@ -1,6 +1,9 @@
+import { useContext } from 'react'
 import { Box, Row, Col, HeaderRow, Table } from './styled'
+import { CharactersContext } from 'contexts/CharactersContext'
 
-const CharactersList = ({ characters = [] }) => {
+const CharactersList = () => {
+  const { characters } = useContext(CharactersContext)
   return (
     <>
       <HeaderRow header>
