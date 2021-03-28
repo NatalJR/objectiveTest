@@ -5,33 +5,25 @@ export const Wrapper = styled.div`
   width: 100%;
 `
 
-export const Table = styled.div`
-  width: calc(100% - 8px);
+export const Row = styled.div`
   display: flex;
   height: 88px;
-  flex: 1 1 auto;
-  overflow-y: auto;
-  flex-direction: column;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`
-
-export const Box = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-export const HeaderRow = styled.div`
-  display: flex;
+  padding: 20px 24px;
+  background-color: #ffffff;
   justify-content: flex-start;
-  height: fit-content;
-  padding: 0 24px;
-  margin-bottom: 9px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 5px ${COLORS.shadowBoxColor};
   @media (max-width: 700px) {
-    margin-left: 64px;
+    height: 72px;
+    padding: 12px 16px;
   }
+`
+
+export const InnerRow = styled.div`
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
 `
 
 export const Text = styled.p`
@@ -46,6 +38,9 @@ export const Text = styled.p`
   }}
   letter-spacing: 0px;
   color: ${({ header }) => (header ? COLORS.smoke : COLORS.darkSmoke)};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 export const Col = styled.div`
@@ -57,4 +52,11 @@ export const Col = styled.div`
   @media (max-width: 700px) {
     ${({ required }) => !required && 'display:none'};
   }
+`
+
+export const Thumbnail = styled.img`
+  width: 48px;
+  height: 48px;
+  margin-right: 24px;
+  border-radius: 4px;
 `

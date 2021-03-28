@@ -2,6 +2,12 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.div`
   margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 700px) {
+    margin-bottom: 32px;
+    align-items: center;
+  }
 `
 export const Label = styled.div`
   text-align: left;
@@ -9,9 +15,10 @@ export const Label = styled.div`
   letter-spacing: 0px;
   color: #555555;
   margin-bottom: 8px;
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     font-size: 14px;
     line-height: 16px;
+    text-align: center;
   }
 `
 
@@ -19,7 +26,6 @@ export const SearchInputWrapper = styled.div`
   width: 295px;
   display: flex;
   height: 32px;
-  justify-content: space-between;
   align-items: center;
   padding: 4px 16px;
   background: #ffffff;

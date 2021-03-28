@@ -3,13 +3,16 @@ import COLORS from 'styles/colors'
 
 export const Wrapper = styled.div`
   width: 83.5%;
-  height: 100%;
+  height: calc(100% - 79px);
   padding: 40px 0 16px 0;
   display: flex;
   flex-direction: column;
 
   @media (max-height: 667px) {
     padding: 24px 0 24px 0;
+  }
+  @media (max-height: 667px) and (orientation: landscape) {
+    overflow-y: auto;
   }
 `
 
@@ -28,18 +31,19 @@ export const Header = styled.h1`
   letter-spacing: 0px;
   color: #555555;
   margin-bottom: 16px;
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     font-size: 27px;
     line-height: 24px;
+    text-align: center;
   }
 `
 
 export const PaginationWrapper = styled.div`
-  height: 79px;
   width: 100%;
+  height: 79px;
+  flex: 1 0 79px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1 1 79px;
   background: ${COLORS.white};
 `

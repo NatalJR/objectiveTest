@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useCallback } from 'react'
 import {
   Wrapper,
   Header,
@@ -9,40 +9,37 @@ import {
 import SearchBar from 'components/CharactersComponents/SearchBar'
 import List from 'components/CharactersComponents/CharactersList'
 import Pagination from 'components/CharactersComponents/CharactersPagination'
-import { CharactersContext } from 'contexts/CharactersContext'
+import { useCharacters } from 'contexts/CharactersContext'
 import { getCharacters } from 'adapters/CharactersAdapter'
 
 const CharactersLayout = () => {
-  const [charactersPages, setCharactersPages] = useState([])
-  const [activePage, setActivePage] = useState(1)
-  const [totalPages, setTotalPages] = useState(1)
-
+  const { state, dispatch } = useCharacters()
   const getCharactersAsync = useCallback(async () => {
     const limit = 10
-    const data = await getCharacters({ page: activePage, limit })
+    const data = await getCharacters({
+      page: state.activePage,
+      search: state.search,
+      limit,
+    })
     if (data) {
-      setCharactersPages(data.results)
-      setTotalPages(data.total / limit)
+      dispatch({
+        type: 'setCharactersPage',
+        value: {
+          results: data.results,
+          totalPages: Math.ceil(data.total / limit),
+        },
+      })
     }
-  }, [activePage])
+  }, [state.activePage, state.search, dispatch])
 
   useEffect(() => {
-    if (activePage >= 0) {
+    if (state.activePage >= 0) {
       getCharactersAsync()
     }
-  }, [activePage, getCharactersAsync])
+  }, [state.activePage, getCharactersAsync])
 
   return (
-    <CharactersContext.Provider
-      value={{
-        charactersPages,
-        totalPages,
-        activePage: activePage - 1,
-        setActivePage,
-        setCharactersPages,
-        getCharactersAsync,
-      }}
-    >
+    <>
       <Wrapper>
         <HeaderWrapper>
           <Header>Busca de personagens</Header>
@@ -55,7 +52,7 @@ const CharactersLayout = () => {
       <PaginationWrapper>
         <Pagination />
       </PaginationWrapper>
-    </CharactersContext.Provider>
+    </>
   )
 }
 
