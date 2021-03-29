@@ -6,18 +6,19 @@ import {
   PageButtonWrapper,
 } from './styled'
 import { useCharacters } from 'contexts/CharactersContext'
+import debounced from 'utils/debounced'
 
 const CharactersPagination = () => {
   const { state, dispatch } = useCharacters()
   const [maxItems, setMaxItem] = useState(window.innerWidth < 700 ? 3 : 5)
 
   useEffect(() => {
-    function handleResize() {
+    const debouncedResize = debounced(function handleResize() {
       setMaxItem(window.innerWidth < 700 ? 3 : 5)
-    }
-    window.addEventListener('resize', handleResize)
+    }, 250)
+    window.addEventListener('resize', debouncedResize)
     return () => {
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('resize', debouncedResize)
     }
   }, [])
 
@@ -32,10 +33,8 @@ const CharactersPagination = () => {
     const toPage = Math.min(fromPage + maxItems - 1, numberOfPages)
 
     // ensures page selection behaviour (if possible, always have maxItems clickable pages)
-    const possibleMinPage = fromPage + maxItems - 1
-    const minPage = numberOfPages - maxItems + 1
-    if (minPage > 0 && possibleMinPage >= numberOfPages) {
-      fromPage = minPage
+    if (toPage - fromPage < maxItems) {
+      fromPage = Math.max(toPage - maxItems + 1, 1)
     }
 
     const pageRange = range.slice(fromPage - 1, toPage)
@@ -73,11 +72,15 @@ const CharactersPagination = () => {
       <ButtonWrapper
         onClick={() => dispatch({ type: 'goToNextPage' })}
         shouldRender={state.activePage < state.totalPages}
-      >{`>`}</ButtonWrapper>
+      >
+        <p>{`>`}</p>
+      </ButtonWrapper>
       <ButtonWrapper
         onClick={() => dispatch({ type: 'goToLastPage' })}
         shouldRender={state.activePage < state.totalPages - 1}
-      >{`>>`}</ButtonWrapper>
+      >
+        <p>{`>>`}</p>
+      </ButtonWrapper>
     </ButtonsWrapper>
   )
 }

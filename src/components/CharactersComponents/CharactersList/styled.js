@@ -6,15 +6,19 @@ export const Wrapper = styled.div`
 `
 
 export const Table = styled.div`
-  width: calc(100% - 8px);
+  width: 100%;
   display: flex;
   height: 88px;
   flex: 1 1 auto;
-  overflow-y: auto;
+  overflow-y: scroll;
   flex-direction: column;
 
   &::-webkit-scrollbar {
-    display: none;
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${COLORS.smoke};
   }
 `
 

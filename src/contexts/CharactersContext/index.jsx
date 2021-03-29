@@ -30,6 +30,14 @@ function charactersReducer(state, action) {
     case 'searchCharacter': {
       return { ...state, search: action.value, activePage: 1 }
     }
+    case 'selectCharacter': {
+      const selectedCharacter =
+        state.selectedCharacter !== action.value ? action.value : -1
+      return { ...state, selectedCharacter }
+    }
+    case 'setComics': {
+      return { ...state, comics: action.value }
+    }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
     }
@@ -41,6 +49,8 @@ function CharactersProvider({ children }) {
     activePage: 1,
     totalPages: 1,
     search: '',
+    selectedCharacter: -1,
+    comics: [],
     charactersPage: [],
   })
   const value = { state, dispatch }

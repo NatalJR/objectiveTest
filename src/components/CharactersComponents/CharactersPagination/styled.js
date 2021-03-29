@@ -30,7 +30,7 @@ export const ButtonWrapper = styled.div`
     font-family: PT Sans;
     font-weight: bold;
     font-size: 16px;
-    :hover {
+    &:hover {
       color: ${COLORS.darkBlue};
     }
   }

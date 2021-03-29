@@ -38,7 +38,7 @@ export const SearchInputWrapper = styled.div`
     width: 255px;
     line-height: 17px;
     font: normal normal normal 14px/19px 'PT Sans';
-    ::placeholder {
+    &::placeholder {
       text-align: left;
       font-style: italic;
       letter-spacing: 0px;

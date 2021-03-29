@@ -1,15 +1,16 @@
-function getInitializer({ method, etag }) {
+function getInitializer({ method /*etag*/ }) {
   return {
     method,
     mode: 'cors',
     cache: 'default',
     headers: {
-      'If-None-Match': etag,
+      // 'If-None-Match': etag,
+      // 'Cache-Control': 'public, max-age=31536000',
     },
   }
 }
 
-export function get(url, params, etag) {
+export function get(url, params = {} /*, etag*/) {
   const uri = new URL(url)
 
   uri.search = new URLSearchParams({
@@ -17,7 +18,7 @@ export function get(url, params, etag) {
     apikey: process.env.REACT_APP_API_KEY,
   }).toString()
 
-  const initializer = getInitializer({ method: 'get', etag })
+  const initializer = getInitializer({ method: 'get' /*, etag*/ })
   return fetch(uri, initializer)
 }
 

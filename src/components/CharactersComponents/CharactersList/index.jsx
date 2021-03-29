@@ -1,9 +1,10 @@
 import { Box, Col, HeaderRow, Table, Text } from './styled'
-import CharactersCard from 'components/CharactersComponents/CharactersCard'
 import { useCharacters } from 'contexts/CharactersContext'
+import CharactersCard from 'components/CharactersComponents/CharactersCard'
 
 const CharactersList = () => {
   const { state } = useCharacters()
+
   return (
     <>
       <HeaderRow header>

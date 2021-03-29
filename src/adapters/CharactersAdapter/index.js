@@ -21,3 +21,18 @@ export const getCharacters = async ({
     return null
   }
 }
+
+export const getComicsByCharacterId = async id => {
+  const params = { limit: 30 }
+  try {
+    const response = await get(
+      `${BASE_API_URL}/characters/${id}/comics`,
+      params,
+    )
+    const responseJson = await response.json()
+    const data = responseJson.data
+    return data
+  } catch {
+    return null
+  }
+}
